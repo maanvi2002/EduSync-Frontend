@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login</title>
+</head>
+<body>
+    <h2>Test Login API</h2>
+    <button onclick="testLogin()">Test Login API</button>
+    <pre id="result" style="margin-top: 20px;"></pre>
+
+    <script>
+        async function testLogin() {
+            const resultElement = document.getElementById('result');
+            try {
+                const response = await fetch('https://localhost:7221/api/Auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'test123'
+                    })
+                });
+
+                const result = await response.text();
+                resultElement.textContent = `Status: ${response.status}\nResponse: ${result}`;
+            } catch (error) {
+                resultElement.textContent = `Error: ${error.message}\n\nMake sure:\n1. Backend is running\n2. CORS is enabled\n3. SSL certificate is trusted`;
+                console.error('Full error:', error);
+            }
+        }
+    </script>
+</body>
+</html> 
+ 
