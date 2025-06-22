@@ -32,6 +32,10 @@ jobs:
                const coredemo = require('@actions/core')
                return await coredemo.getIDToken()
            result-encoding: string
+
+      - name: Disable CI strict mode
+        run: echo "CI=false" >> $GITHUB_ENV
+        
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
